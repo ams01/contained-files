@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-2" ?>
+
+<!--  Use with CSV file struct like: 3000;192.168.1.106;[authentication username=3000 password=3000];
+      (user part of uri, server address, auth tag in each line)
+-->
+
+<scenario name="register_client">
+
+  <!--
+  <send>
+    <![CDATA[
+
+      REGISTER sip:[field0]@[field1] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: <sip:[field0]@[field1]>;tag=reg[call_number]
+      To: <sip:[field0]@[field1]>
+      Contact: <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
+      Call-ID: [call_id]
+      CSeq: [cseq] REGISTER
+      Expires: 0
+      Max-Forwards: 3
+      Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+      User-Agent: SIPp/Win32
+      Content-Length: [len]
+    ]]>
+  </send>
+
+  <recv response="200">
+  </recv>
+
+      REGISTER sip:[field0]@[field1] SIP/2.0
+  -->
+
+  <send>
+    <![CDATA[
+
+      REGISTER sip:[field0]@[field1] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: <sip:[field0]@[field1]>;tag=reg[call_number]
+      To: <sip:[field0]@[field1]>
+      Contact: <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
+      Call-ID: [call_id]
+      CSeq: [cseq] REGISTER
+      Max-Forwards: 3
+      Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+      User-Agent: SIPp/Win32
+      Expires: 60
+      Content-Length: [len]
+    ]]>
+  </send>
+
+  <!-- asterisk -->
+
+  <recv response="100" optional="true" />
+  <recv response="483" optional="true" />
+  <recv response="408" optional="true" />
+  <recv response="403" optional="true" />
+  <recv response="500" optional="true" />
+  <recv response="504" optional="true" />
+  <recv response="401" auth="true"> 
+  </recv>
+
+  <send>
+    <![CDATA[
+
+      REGISTER sip:[field0]@[field1] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: <sip:[field0]@[field1]>;tag=reg[call_number]
+      To: <sip:[field0]@[field1]>
+      Contact: <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
+      Call-ID: [call_id]
+      CSeq: [cseq] REGISTER
+      [field2]
+      Max-Forwards: 3
+      Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+      User-Agent: SIPp/Win32
+      Expires: 60
+      Content-Length: [len]
+
+    ]]>
+  </send>
+
+  <recv response="100" optional="true" />
+  <recv response="483" optional="true" />
+  <recv response="500" optional="true" />
+  <recv response="504" optional="true" />
+  <recv response="200">
+  </recv>
+
+
+<!--    
+  <pause milliseconds="100"/>
+
+  <send>
+    <![CDATA[
+
+      REGISTER sip:[field0]@[field1] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: <sip:[field0]@[field1]>;tag=reg[call_number]
+      To: <sip:[field0]@[field1]>
+      Contact: <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
+      Call-ID: [call_id]
+      CSeq: [cseq] REGISTER
+      Expires: 0
+      Max-Forwards: 3
+      Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+      User-Agent: SIPp/Win32
+      Content-Length: [len]
+    ]]>
+  </send>
+
+  <recv response="200">
+  </recv>
+--> 
+
+</scenario>
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd  clearwater-docker
+sudo docker-compose -f dispatch.yaml up
+

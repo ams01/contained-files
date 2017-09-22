@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cd  clearwater-docker
+
+echo "Stopping existing clearwater instance"
+# First shutdowm the old deployment
+sudo docker-compose -f minimal-distributed.yaml down
+
+sleep 2
+
+echo "Starting new instance"
+sudo docker-compose -f minimal-distributed.yaml up
+
+
